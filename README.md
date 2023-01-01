@@ -8,7 +8,7 @@
   - Recommended version [3.10.2](https://www.python.org/downloads/release/python-3102/)
 - A Discord server that you own.
   
-## Usage ✨
+## Setup ✨
 1. Download and install [Python](https://www.python.org/downloads) 
 ![](https://i.alexflipnote.dev/2Ucs5Hf.png)
 
@@ -21,6 +21,7 @@
    - If you are on Windows, you might need to run command prompt as Administrator)
  ![](https://i.alexflipnote.dev/4QPnZiX.gif)
 
+## Run The Bot 🤖
 4. Go to the [discord developer panel](https://discord.com/developers/applications), sign in, and click `New Application`. Choose any name, click accept and create. Next navigate to the `Bot` section and click `Add Bot`.  Click on `Reset Token` and copy the one one.
 
 5. Open the Projekt Foulder with your IDE.
