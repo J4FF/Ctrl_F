@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Ctrl F" src="[Ctrl_F/FFFFF.png](https://github.com/J4FF/Ctrl_F)" width="750px">
+  <img alt="Ctrl F" src="https://github.com/J4FF/Ctrl_F/blob/main/FFFFF.png" width="750px">
 </p>
 
 # Requirements 🧾
