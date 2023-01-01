@@ -7,7 +7,6 @@
 - Python 3.8 or above (https://www.python.org/downloads)
   - Recommended version [3.10.2](https://www.python.org/downloads/release/python-3102/)
 - A Discord server that you own.
-  - Make sure to "enable community" in your server if you haven't already! (`Settings` -> `Enable Community`)
   
 ## Usage ✨
 1. Download and install [Python](https://www.python.org/downloads) 
