@@ -12,6 +12,10 @@
 1. Download and install [Python](https://www.python.org/downloads) 
 ![](https://i.alexflipnote.dev/2Ucs5Hf.png)
 
+2.Download the Bot
+![](https://github.com/J4FF/Ctrl_F/blob/main/unszip.png)
+
+
 2. Open CMD/Terminal inside this folder.
    - On Windows, open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
  
