@@ -31,20 +31,13 @@
    - **IMPORTANT:** DO NOT share the token! Others can use this to log into your account.
    - Note that to make it respond to your commands, you will need to keep the application/script window alive as it is what runs the bot to begin with. After you are done with everything, you can safely just close it.
 7. When the bot has logged in, copy the invite link given to you by highlighting the URL and right-clicking, then go to a browser and paste the URL.
-8. Invite the bot in to your server.
-9. Within the server, Use the `/hello` command provided to you.
-10. Enter to https://discord.com/developers/active-developer and claim your badge.
-   - It might take 24 hours before you are able to claim at all, so please take time to wait a bit if that is the case.
-   - Note that to make it respond to your commands, you will need to keep the application/script window open.
 7. Invite the bot in to your server.
 8. Within the server, Use `/search` or `"!f"`.
 
-## Help needed? 📞
-Join https://discord.gg/AlexFlipnote if you need help.
+## Need Support? 📞
 Join (https://discord.gg/HhaRHtb7hT) if you need help.
 
 ## Contributors
-Big thanks to all of the amazing people who have helped by contributing to this project!
 Big thanks to Loen#8463, Blue#2095 who have helped made this project!
 
 <a href="https://github.com/AlexFlipnote/GiveMeBadge/graphs/contributors">
