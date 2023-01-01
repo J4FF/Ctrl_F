@@ -15,7 +15,7 @@
 2. Open CMD/Terminal inside this folder.
    - On Windows, open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
 
- ![](https://i.alexflipnote.dev/7PvV4Eo.png)
+ ![](‪C:\Users\jonat\Desktop\image.png)
 3. Install `requirements.txt` with the command `pip install -r requirements.txt`
    - If you are on Windows, you might need to run command prompt as Administrator)
 ![](https://i.alexflipnote.dev/4QPnZiX.gif)
