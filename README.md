@@ -35,7 +35,7 @@
 8. Within the server, Use `/search` or `"!f"`.
 
 ## Need Support? 📞
-Join (https://discord.gg/HhaRHtb7hT) if you need help.
+Join https://discord.gg/HhaRHtb7hT if you need help.
 
 ## Contributors
 Big thanks to Loen#8463, Blue#2095 who have helped made this project!
