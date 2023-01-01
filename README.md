@@ -1,2 +1,2 @@
-# Ctrl_F
+# Requirements 🧾
 Ctrl F uses the Wikipedia search API to search for terms.
