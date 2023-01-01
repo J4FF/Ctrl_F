@@ -49,3 +49,4 @@ Big thanks to Loen#8463, Blue#2095 who have helped made this project!
 
 <a href="https://github.com/AlexFlipnote/GiveMeBadge/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=AlexFlipnote/GiveMeBadge" />
+  
