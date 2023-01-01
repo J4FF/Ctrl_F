@@ -14,6 +14,7 @@
 
 2. Open CMD/Terminal inside this folder.
    - On Windows, open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
+ 
  ![](https://github.com/J4FF/Ctrl_F/blob/main/image.png)
  
 3. Install `requirements.txt` with the command `pip install -r requirements.txt`
