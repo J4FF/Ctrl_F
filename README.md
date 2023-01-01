@@ -40,6 +40,6 @@ Join (https://discord.gg/HhaRHtb7hT) if you need help.
 ## Contributors
 Big thanks to Loen#8463, Blue#2095 who have helped made this project!
 
-<a href="https://github.com/AlexFlipnote/GiveMeBadge/graphs/contributors">
+<a href="(https://github.com/J4FF/Ctrl_F/blob/main/helper.png?raw=true)">
   <img src="https://contrib.rocks/image?repo=AlexFlipnote/GiveMeBadge" />
   
