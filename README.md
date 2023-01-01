@@ -23,7 +23,7 @@
 
 4. Go to the [discord developer panel](https://discord.com/developers/applications), sign in, and click `New Application`. Choose any name, click accept and create. Next navigate to the `Bot` section and click `Add Bot`.  Click on `Reset Token` and copy the one one.
 
-5. Open the script by with your IDE 
+5. Open the Projekt Foulder with your IDE.
 
     ![](https://github.com/J4FF/Ctrl_F/blob/main/image.png)
 6. Paste your Discord token by copying it and right-clicking on the application. Some users can also try `CTRL + V` or `CTRL + Shift + V`.
