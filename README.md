@@ -14,7 +14,7 @@
 
 2.Download the Bot
 
-![](https://github.com/J4FF/Ctrl_F/blob/main/unszip.png)
+![](https://github.com/J4FF/Ctrl_F/blob/main/exctract.png)
 
 
 2. Open CMD/Terminal inside this folder.
