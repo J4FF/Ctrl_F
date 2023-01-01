@@ -1,0 +1,4 @@
+discord
+discord.ext
+wikipedia as wiki
+translators.server as tss
