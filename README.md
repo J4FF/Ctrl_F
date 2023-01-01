@@ -12,14 +12,16 @@
 1. Download and install [Python](https://www.python.org/downloads) 
 ![](https://i.alexflipnote.dev/2Ucs5Hf.png)
 
+2. Open CMD/Terminal inside this folder.
+   - On Windows, open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
 
-
+ ![](https://i.alexflipnote.dev/7PvV4Eo.png)
+3. Install `requirements.txt` with the command `pip install -r requirements.txt`
+   - If you are on Windows, you might need to run command prompt as Administrator)
 ![](https://i.alexflipnote.dev/4QPnZiX.gif)
 
-4. Navigate to the [discord developer panel](https://discord.com/developers/applications), sign in, and click `New Application`. Choose any name, click accept and create. Next navigate to the `Bot` section and click `Add Bot`.  Click on `Reset Token` and copy the one one.
 4. Go to the [discord developer panel](https://discord.com/developers/applications), sign in, and click `New Application`. Choose any name, click accept and create. Next navigate to the `Bot` section and click `Add Bot`.  Click on `Reset Token` and copy the one one.
 
-5. Open the script by using the command `python index.py` (It might be different, like Linux and MacOS can be using python3).
 5. Open the script by with your IDE 
 
     ![](https://i.alexflipnote.dev/9BNt3XM.png)
