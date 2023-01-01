@@ -22,7 +22,7 @@
  ![](https://github.com/J4FF/Ctrl_F/blob/main/extract.png)
 
 3. Open CMD/Terminal inside this folder.
-   - On Windows, open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
+   - Picture, else open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
 
 ![](https://github.com/J4FF/Ctrl_F/blob/main/terminal.png)
 
