@@ -25,7 +25,7 @@
 
 5. Open the script by with your IDE 
 
-    ![](https://i.alexflipnote.dev/9BNt3XM.png)
+    ![](https://github.com/J4FF/Ctrl_F/blob/main/image.png)
 6. Paste your Discord token by copying it and right-clicking on the application. Some users can also try `CTRL + V` or `CTRL + Shift + V`.
 6. Paste your Discord token by copying it and replacing it with "YOUR_BOT_TOKEN".(All the way down in the code)
    - **IMPORTANT:** DO NOT share the token! Others can use this to log into your account.
