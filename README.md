@@ -10,6 +10,9 @@
   
 ## Usage ✨
 1. Download and install [Python](https://www.python.org/downloads) 
+![](https://i.alexflipnote.dev/2Ucs5Hf.png)
+
+
 
 ![](https://i.alexflipnote.dev/4QPnZiX.gif)
 
