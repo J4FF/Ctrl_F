@@ -13,6 +13,7 @@
 ![](https://i.alexflipnote.dev/2Ucs5Hf.png)
 
 2.Download the Bot
+
 ![](https://github.com/J4FF/Ctrl_F/blob/main/unszip.png)
 
 
