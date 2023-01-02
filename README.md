@@ -53,7 +53,7 @@
 Join https://discord.gg/HhaRHtb7hT if you need help.
 
 ## Contributors
-Big thanks to Loen#8463, Blue#2095 who have helped made this project!
+Big thanks to Loen#8463 and Blue#2095 who have helped made this project!
 
   <img src="https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/helper.png" />
   
