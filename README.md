@@ -35,14 +35,19 @@
 
 6. Open the Projekt Foulder with your IDE.
 
-    ![](https://github.com/J4FF/Ctrl_F/blob/main/image.png)
+  ![](https://github.com/J4FF/Ctrl_F/blob/main/image.png)
+
 7. Paste your Discord token by copying it and replacing it with "YOUR_BOT_TOKEN".(All the way down in the code)
    - **IMPORTANT:** DO NOT share the token! Others can use this to log into your account.
    - Note that to make it respond to your commands, you will need to keep the application/script window alive as it is what runs the bot to begin with. After you are done with everything, you can safely just close it.
 
 8. Invite the bot in to your server.
 
-9. Within the server, Use `/search` or `"!f"`.
+9.Runn you Bot in IDE.
+
+  ![](https://github.com/J4FF/Ctrl_F/blob/main/ide.png)
+
+10. Within the server, Use `/search` or `"!f"`.
 
 ## Need Support? 📞
 Join https://discord.gg/HhaRHtb7hT if you need help.
