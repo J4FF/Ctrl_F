@@ -47,7 +47,7 @@
 
   ![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/ide.png)
   
-10. Within the server, Use `/search` or `"!f"` in any Channel.
+10. Within the server, Use the slash-Command `/search` or use the Prefix`"!f"` in any Channel.
 
 ## Need Support? 📞
 Join https://discord.gg/HhaRHtb7hT if you need help.
