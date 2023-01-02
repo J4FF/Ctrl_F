@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Ctrl F" src="https://github.com/J4FF/Ctrl_F/blob/main/FFFFF.png" width="750px">
+  <img alt="Ctrl F" src="https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/FFFFF.png" width="750px">
 </p>
 
 # Requirements 🧾
@@ -14,28 +14,28 @@
 
 2.Download the Bot
 
-![](https://github.com/J4FF/Ctrl_F/blob/main/unszip.png)
+![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/unszip.png)
 
 
 2. Extract the folder.
  
- ![](https://github.com/J4FF/Ctrl_F/blob/main/extract.png)
+ ![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/extract.png)
 
 3. Open CMD/Terminal inside this folder.
    - Picture, else open a `command prompt` as administrator. Type `cd` with a space and drag the desired folder into it. Press enter.
 
-![](https://github.com/J4FF/Ctrl_F/blob/main/terminal.png)
+![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/terminal.png)
 
 4. Install `requirements.txt` with the command `pip install -r requirements.txt`
    - If you are on Windows, you might need to run command prompt as Administrator)
- ![](https://github.com/J4FF/Ctrl_F/blob/main/installr.png)
+ ![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/installr.png)
 
 ## Run The Bot 🤖
 5. Go to the [discord developer panel](https://discord.com/developers/applications), sign in, and click `New Application`. Choose any name, click accept and create. Next navigate to the `Bot` section and click `Add Bot`.  Click on `Reset Token` and copy the one one.
 
 6. Open the Projekt Foulder with your IDE.
 
-  ![](https://github.com/J4FF/Ctrl_F/blob/main/image.png)
+  ![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/image.png)
 
 7. Paste your Discord token by copying it and replacing it with "YOUR_BOT_TOKEN".(All the way down in the code)
    - **IMPORTANT:** DO NOT share the token! Others can use this to log into your account.
@@ -45,7 +45,7 @@
 
 9.Runn you Bot in IDE.
 
-  ![](https://github.com/J4FF/Ctrl_F/blob/main/ide.png)
+  ![](https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/ide.png)
 
 10. Within the server, Use `/search` or `"!f"`.
 
@@ -55,5 +55,5 @@ Join https://discord.gg/HhaRHtb7hT if you need help.
 ## Contributors
 Big thanks to Loen#8463, Blue#2095 who have helped made this project!
 
-  <img src="https://github.com/J4FF/Ctrl_F/blob/main/helper.png" />
+  <img src="https://github.com/J4FF/Ctrl_F/blob/main/GitImage's/helper.png" />
   
