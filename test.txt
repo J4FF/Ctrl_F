@@ -1,0 +1,21 @@
+import socket
+
+# Zielsystem und Portbereich festlegen
+ziel_system = "localhost"  # Hier das Zielsystem angeben (z.B., IP-Adresse oder Hostname)
+start_port = 1
+end_port = 1024  # Sie können den Portbereich anpassen, je nachdem, welche Ports Sie überprüfen möchten
+
+# Ergebnisse in eine Textdatei schreiben
+with open("offene_ports.txt", "w") as f:
+    for port in range(start_port, end_port + 1):
+        try:
+            # Versuche, eine Verbindung zum Port herzustellen
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(1)  # Setze eine Timeout-Zeit für den Verbindungsversuch
+                result = s.connect_ex((ziel_system, port))
+                if result == 0:
+                    f.write(f"Port {port} ist offen.\n")
+        except Exception as e:
+            pass  # Fehler ignorieren und zum nächsten Port gehen
+
+print("Offene Ports wurden in 'offene_ports.txt' dokumentiert.")
