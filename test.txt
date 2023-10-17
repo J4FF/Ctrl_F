@@ -34,3 +34,10 @@ python-3.11.4-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 In
 setx path "%PATH%;%USERPROFILE%\Python3114" /M
 
 
+@echo off
+powershell -Command "& { iwr 'https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe' -OutFile 'python-3.11.4-amd64.exe' }"
+python-3.11.4-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 InstallLauncherAllUsers=1 TargetDir=%USERPROFILE%\Python3114
+setx path "%PATH%;%USERPROFILE%\Python3114;%USERPROFILE%\Python3114\Scripts" /M
+
+
+
