@@ -23,21 +23,18 @@ with open("offene_ports.txt", "w") as f:
 print("Offene Ports wurden in 'offene_ports.txt' dokumentiert.")
 
 
-@echo off
-powershell -Command "& { iwr 'https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe' -OutFile 'python-3.11.4-amd64.exe' }"
-python-3.11.4-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 TargetDir=%USERPROFILE%\Python3114
-setx path "%PATH%;%USERPROFILE%\Python3114" /M
-
-@echo off
-powershell -Command "& { iwr 'https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe' -OutFile 'python-3.11.4-amd64.exe' }"
-python-3.11.4-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 InstallLauncherAllUsers=1 TargetDir=%USERPROFILE%\Python3114
-setx path "%PATH%;%USERPROFILE%\Python3114" /M
-
-
+# python
 @echo off
 powershell -Command "& { iwr 'https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe' -OutFile 'python-3.11.4-amd64.exe' }"
 python-3.11.4-amd64.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 InstallLauncherAllUsers=1 TargetDir=%USERPROFILE%\Python3114
 setx path "%PATH%;%USERPROFILE%\Python3114;%USERPROFILE%\Python3114\Scripts" /M
+
+# vscode
+
+@echo off
+powershell -Command "& { iwr 'https://aka.ms/win32-x64-user-stable' -OutFile 'VSCodeSetup.exe' }"
+VSCodeSetup.exe /verysilent /mergetasks=!runcode
+
 
 
 
