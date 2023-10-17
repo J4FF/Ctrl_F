@@ -25,3 +25,4 @@ print("Offene Ports wurden in 'offene_ports.txt' dokumentiert.")
 
 start cmd /k powershell -Command "(New-Object Net.WebClient).DownloadFile ('https://www.python.org/ftp/python/3.11.4/python-3.11.4.exe', 'C:/Tools/python-3.11.4.exe')" && c:\\Tools\\python-3.11.4.exe /quiet InstallAllUsers=1 PrependPath=1 Include_test=0 TargetDir=c:\\Tools\\Python3114 && setx path "%PATH%;C:\\Tools\\Python3114\\" /M
 
+
