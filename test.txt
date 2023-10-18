@@ -1,7 +1,6 @@
 import socket
 https://discord.com/api/webhooks/1159064400360120391/aaQF_RsyVuAz2QKXglCZHBwGYPuDjJEPJi5CxHYRqn8849x7QmfywQKzPSorCDpA0HA1
-https://1drv.ms/u/s!AtgjBwH5vhAukZApuaIAawSK2RfMyA?e=2Dc3qj
-
+https://1drv.ms/u/s!AtgjBwH5vhAukZAq3t1cSGkO-orECg?e=HeU31M
 # Zielsystem und Portbereich festlegen
 ziel_system = "localhost"  # Hier das Zielsystem angeben (z.B., IP-Adresse oder Hostname)
 start_port = 1
