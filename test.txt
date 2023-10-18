@@ -36,5 +36,571 @@ powershell -Command "& { iwr 'https://aka.ms/win32-x64-user-stable' -OutFile 'VS
 VSCodeSetup.exe /verysilent /mergetasks=!runcode
 
 
+# sus 
+
+# -------------------------------------------------------Import Area-------------------------------------------------------
+from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import StaleElementReferenceException
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.edge.options import Options
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+from PIL import ImageGrab
+import requests
+import gspread
+import random
+import time
+import nltk
+import json
+import os
+from selenium.webdriver.common.action_chains import ActionChains
+
+nltk.download('words')
+
+# -------------------------------------------------------Settings Area (Jakob Area) -------------------------------------------------------
+user_data_dir = os.path.join('C:\\Users', os.environ['USERNAME'], 'AppData', 'Local', 'Microsoft', 'Edge', 'User Data')
+
+error_webhook = "https://discord.com/api/webhooks/1102409687711887500/s-FmCwXuwWDHZTISaV__q3Rd2hzRHuRxJ5dWfZWJ81rmvpBfbgfulee_kUY_9MucBMhS"
+
+# Öffnen der JSON-Datei und Laden der Daten
+with open('config.json', 'r') as config_file:
+    config_data = json.load(config_file)
+account_stand = config_data['account_stand']
+account_passwort = config_data['account_passwort']
+server_name = config_data['server_name']
+account_email = config_data['account_email']
+sheetcord = config_data['sheetcord']
+phone_search_counter = config_data['phone_search_counter']
+search_counter = config_data['search_counter']
+
+#phone_search_counter = 0
+#search_counter = 0
+phone_search_counter = random.randint(1, 5)
+search_counter = random.randint(1, 5)
+
+
+def main():
+    if phone_search_counter > 0:
+        farm_phone_points()
+    if search_counter > 0:
+        pc_searches()
+
+    farm_quiz()
+
+
+# ------------------------------------------------------- Preparation Area -------------------------------------------------------
+print("------------------------------------- Preparation Started... --------------------------------------")
+
+# Prüfen, ob Microsoft Edge-Prozesse laufen
+process_list = os.popen('tasklist').read().lower()
+is_edge_running = 'msedge.exe' in process_list
+
+if is_edge_running:
+    print("Microsoft Edge ist geöffnet. Schließe den Browser...")
+    # Prozess von Microsoft Edge beenden
+    os.system('taskkill /f /im msedge.exe')
+else:
+    print("Microsoft Edge ist nicht geöffnet.")
+os.system("cls")
+
+print("------------------------------------- Preparation Done... --------------------------------------")
+print("Dont Close this window...")
+
+
+def realistic_mouse_click(driver, element):
+    # Überprüfen, ob das Element sichtbar ist
+    if not element.is_displayed():
+        driver.execute_script("arguments[0].scrollIntoView();", element)
+    # Warten, um sicherzustellen, dass das Element geladen ist
+    time.sleep(1)  # Passen Sie die Wartezeit nach Bedarf an
+    # Mausbewegungen erstellen
+    actions = ActionChains(driver)
+    # Mausbewegung zur Startposition des Elements
+    actions.move_to_element(element)
+    # Hier beginnt die realistische Bewegung
+    for _ in range(2):  # Zum Beispiel 10 Schritte
+        # Zufällige Abweichung von der geraden Linie
+        x_offset = random.randint(-5, 5)
+        y_offset = random.randint(-5, 5)
+        # Maus um den Offset bewegen (verzögert)
+        actions.move_by_offset(x_offset, y_offset)
+        actions.perform()
+        # Kurze Pause, um die Bewegung realistischer zu gestalten
+        time.sleep(random.uniform(0.1, 0.5))
+
+    actions.click().perform()
+
+
+def farm_phone_points():
+    try:
+        # ------------------------------------------------------- Phone settings -------------------------------------------------------
+        mobile_emulation = {
+            "deviceMetrics": {"width": 360, "height": 640, "pixelRatio": 3.0},
+            "userAgent": "Mozilla/5.0 (Linux; Android 10; SM-G970F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Mobile Safari/537.36",
+        }
+        edge_options = Options()
+        edge_options.use_chromium = True
+        edge_options.add_argument(f'user-data-dir={user_data_dir}')
+        edge_options.add_experimental_option("mobileEmulation", mobile_emulation)
+        edge_options.add_experimental_option("excludeSwitches", ["enable-popup-blocking"])
+        edge_options.add_argument("--profile.default_content_setting_values.geolocation=1")  # old is 2
+
+        # new and testing
+        edge_options.add_experimental_option('useAutomationExtension', False)
+        edge_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        edge_options.add_argument('--no-sandbox')
+        edge_options.add_argument('--disable-blink-features=AutomationControlled')
+
+        # Erstelle eine Instanz des Edge-Browsers
+        edge_phone_driver = webdriver.Edge(options=edge_options)
+        # start pause
+        time.sleep(1.5)
+        # ------------------------------------------------------- Phone Login  -------------------------------------------------------
+        # Führe weitere Befehle mit dem WebDriver aus, z.B.:
+        # anmelden smartphone
+        # phone_error_webhook = "https://discord.com/api/webhooks/1102409687711887500/s-FmCwXuwWDHZTISaV__q3Rd2hzRHuRxJ5dWfZWJ81rmvpBfbgfulee_kUY_9MucBMhS"
+
+        # ------------------------------------------------------- Phone Search  -------------------------------------------------------
+        edge_phone_driver.get('https://bing.com')
+        time.sleep(4)
+        try:
+            click_searchbar = WebDriverWait(edge_phone_driver, 3).until(ec.presence_of_element_located((By.XPATH, "//textarea[@id='sb_form_q']")))
+            realistic_mouse_click(edge_phone_driver, click_searchbar)
+            # click_searchbar.click()
+        except TimeoutException:
+            click_searchbar = WebDriverWait(edge_phone_driver, 3).until(ec.presence_of_element_located((By.XPATH, "//input[@id='sb_form_q']")))
+            # click_searchbar.click()
+            realistic_mouse_click(edge_phone_driver, click_searchbar)
+        word_list = nltk.corpus.words.words()  # erstellt wort liste
+        random_word = random.choice(word_list)
+        wort_lange = (len(random_word))  # ermittelt die wort länge, um sie später zu entfernen
+        word_list.append(random_word)  # Das zufällige Wort zur Liste hinzufügen
+        click_searchbar.send_keys(random_word)
+        click_searchbar.send_keys(Keys.ENTER)
+        for d in range(phone_search_counter):
+            try:
+                click_searchbar = WebDriverWait(edge_phone_driver, 3).until(ec.element_to_be_clickable((By.XPATH, "//textarea[@id='sb_form_q']")))
+                # click_searchbar.click()
+                realistic_mouse_click(edge_phone_driver, click_searchbar)
+            except StaleElementReferenceException:
+                time.sleep(2)
+                click_searchbar = WebDriverWait(edge_phone_driver, 3).until(ec.element_to_be_clickable((By.XPATH, "//textarea[@id='sb_form_q']")))
+                # click_searchbar.click()
+                realistic_mouse_click(edge_phone_driver, click_searchbar)
+
+            time.sleep(0.2)
+            # löscht erstes eingabewort
+            for r in range(wort_lange):
+                click_searchbar = WebDriverWait(edge_phone_driver, 3).until(ec.element_to_be_clickable((By.XPATH, '//textarea[@id="sb_form_q"]')))
+                click_searchbar.send_keys(Keys.BACKSPACE * 2)
+                time.sleep(0.01)
+            # nimmt wort aus wortliste
+            random_word = random.choice(word_list)
+            wort_lange = (len(random_word))
+            # gibt word in suchbar hinein
+            click_searchbar.send_keys(random_word)
+            click_searchbar.send_keys(Keys.ENTER)
+            try:
+                accept_click2 = WebDriverWait(edge_phone_driver, 2).until(ec.element_to_be_clickable((By.XPATH, "//button[@id='bnp_btn_accept']")))
+                # accept_click2.click()
+                realistic_mouse_click(edge_phone_driver, accept_click2)
+            except TimeoutException:
+                pass
+        # edge_phone_driver.quit()
+
+    # phone error handling
+    except Exception as e:
+        # Screenshot machen
+        screenshot = ImageGrab.grab()
+        screenshot.save("screenshot.png")
+        # Discord-Nachricht konstruieren und Screenshot als Anhang hinzufügen
+        discord_message = f"Ein Fehler bei Account:│►{account_passwort}│ (Am Handy) ist aufgetreten: {str(e)} @everyone"
+        discord_screenshot_error_message = {"content": discord_message}
+        files = {"file": ("screenshot.png", open("screenshot.png", "rb"))}
+        # Nachricht über Discord-Webhook senden und Screenshot als Anhang hinzufügen
+        requests.post(error_webhook, data=discord_screenshot_error_message, files=files)
+
+
+# ------------------------------------------------------- Main Loop -------------------------------------------------------
+
+def farm_quiz():
+    try:
+        # -------------------------------------------------------VPN Area-------------------------------------------------------
+
+        # ------------------------------------------------------- Option Area-------------------------------------------------------
+        edge_options = Options()
+        edge_options.use_chromium = True
+        edge_options.add_argument(f'user-data-dir={user_data_dir}')
+        edge_options.add_experimental_option("excludeSwitches", ["enable-popup-blocking"])
+        edge_options.add_argument("--profile.default_content_setting_values.geolocation=1")  # old is 2
+
+        # new and testing
+        edge_options.add_experimental_option('useAutomationExtension', False)
+        edge_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        edge_options.add_argument('--no-sandbox')
+        edge_options.add_argument('--disable-blink-features=AutomationControlled')
+
+        # Erstelle eine Instanz des Chrome-Browsers
+        edge_pc_driver = webdriver.Edge(options=edge_options)
+
+        # -------------------------------------------------------challenges Area-------------------------------------------------------
+        # calls site
+        edge_pc_driver.get('https://rewards.bing.com/')
+        edge_pc_driver.execute_script("return document.readyState === 'complete'")
+        # check if site dont load
+        if edge_pc_driver.current_url != "https://rewards.bing.com/":
+            edge_pc_driver.get('https://rewards.bing.com/welcometour')
+
+        # clicks bing wellcome away
+        if edge_pc_driver.current_url == "https://rewards.bing.com/welcometour":
+            click_bing_wellcome_quit = edge_pc_driver.find_element(By.XPATH, "//button[@ng-show='$ctrl.hasCloseButton']")
+            # click_bing_wellcome_quit.click()
+            realistic_mouse_click(edge_pc_driver, click_bing_wellcome_quit)
+            pass
+
+        # wait to load all cards
+        wait = WebDriverWait(edge_pc_driver, 5)
+        elements = wait.until(ec.presence_of_all_elements_located((By.CLASS_NAME, "ds-card-sec")))
+        # loop all buttons and check if they are done
+        for element in elements:
+            element_found = False
+            link = element.get_attribute('href')
+            if not element.is_enabled() or link == "microsoft-edge:https://rewards.bing.com/?pin=true&ref=pin":
+                continue
+            add_medium_elements = element.find_elements(By.CSS_SELECTOR, ".mee-icon.mee-icon-AddMedium")
+            hourglass_elements = element.find_elements(By.CSS_SELECTOR, ".mee-icon.mee-icon-HourGlass")
+            if add_medium_elements or hourglass_elements:
+                try:
+                    realistic_mouse_click(edge_pc_driver, element)
+                except ElementNotInteractableException:
+                    continue
+
+                # wechselt zum neuen tab
+                edge_pc_driver.switch_to.window(edge_pc_driver.window_handles[-1])
+
+                time.sleep(1)
+                # -------------------------------------------------------Quizz Check Area-------------------------------------------------------
+
+                # search for vote challenge
+                abstimmung_checker = None
+                try:
+                    abstimmung_checker = edge_pc_driver.find_element(By.CSS_SELECTOR, "div#btoption0.btOption.b_cards")
+                except Exception:
+                    pass
+
+                if abstimmung_checker:
+                    element_found = True
+                    abstimmung_clicker = edge_pc_driver.find_element(By.CSS_SELECTOR, 'div#btoption0.btOption.b_cards')
+                    try:
+                        # abstimmung_clicker.click()
+                        realistic_mouse_click(edge_pc_driver, abstimmung_clicker)
+                    except Exception:
+                        pass
+
+                    finally:
+                        # Stelle sicher, dass der WebDriver beendet wird, unabhängig von Ausnahmen
+                        try:
+                            # abstimmung_clicker.click()
+                            realistic_mouse_click(edge_pc_driver, abstimmung_clicker)
+                        except Exception:
+                            pass
+
+                # checks for quizz
+                if not element_found:
+                    quiz_detector = None
+                    try:
+                        quiz_detector = WebDriverWait(edge_pc_driver, 5).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="rqStartQuiz"]')))
+                    except TimeoutException:
+                        try:
+                            quiz_detector = edge_pc_driver.find_element(By.XPATH, '//span[@class="bt_corOpStat"]')
+                        except NoSuchElementException:
+                            pass
+                        pass
+                    if quiz_detector:
+                        while True:
+                            try:
+                                quiz_clicker = WebDriverWait(edge_pc_driver, 3).until(ec.element_to_be_clickable((By.XPATH, '//*[@id="rqStartQuiz"]'))) # //input[@type='button' and @value='Mit dem Quiz beginnen!' and @id='rqStartQuiz']
+                                # quiz_clicker.click()
+                                realistic_mouse_click(edge_pc_driver, quiz_clicker)
+                                break
+                            except TimeoutException:
+                                print("Angefangenes quizz")
+                                break
+                            except ElementClickInterceptedException:
+                                pass
+
+                # does 8 question challenge
+                if not element_found:
+                    acht_fragen_quizz = None
+                    try:
+                        acht_fragen_quizz = edge_pc_driver.find_element(By.XPATH, '//span[@class="bt_corOpStat"]')  # '//span[@class="bt_corOpStat"]'
+                    except NoSuchElementException:
+                        pass
+                    if acht_fragen_quizz:
+                        element_found = True
+                        try:
+                            for i in range(3):
+                                for j in range(8):
+                                    option_element = edge_pc_driver.find_element(By.ID, f"rqAnswerOption{j}")
+                                    if option_element.get_attribute("iscorrectoption") == "True":
+                                        realistic_mouse_click(edge_pc_driver, option_element)
+                                        # option_element.click()
+                                        time.sleep(1)
+                                time.sleep(6)
+                                # loading wait
+                        except Exception:
+                            pass
+
+                # does 4 question challenge
+                if not element_found:
+                    vier_fragen_quizz = None
+                    try:
+                        vier_fragen_quizz = edge_pc_driver.find_element(By.CLASS_NAME, "textBasedMultiChoice")
+                    except NoSuchElementException:
+                        pass
+                    if vier_fragen_quizz:
+                        element_found = True
+                        try:
+                            for i in range(3):
+                                for j in range(4):
+                                    option_id = f"rqAnswerOption{j}"
+                                    option_element = edge_pc_driver.find_element(By.ID, option_id)
+                                    realistic_mouse_click(edge_pc_driver, option_element)
+                                    # option_element.click()
+                                    vier_fragen_answer_result = None
+                                    try:
+                                        vier_fragen_answer_result = WebDriverWait(edge_pc_driver, 2).until(ec.visibility_of_element_located((By.XPATH, '//input[@class="rqOption correctAnswer "]')))
+                                    except TimeoutException:
+                                        print("wrong")
+                                    if vier_fragen_answer_result:
+                                        print("correct")
+                                        break
+                                    time.sleep(1.5)
+                                time.sleep(5)
+                                # loading wait
+                        except Exception:
+                            pass
+
+                    # does picture choose challenge
+                    or_detector = None
+                    try:
+                        or_detector = edge_pc_driver.find_element(By.XPATH, "//div[@class='btOptionCard' and @id='rqAnswerOption0']")
+                    except NoSuchElementException:
+                        pass
+                    if or_detector:
+                        element_found = True
+                        try:
+                            for i in range(10):
+                                or_detector = edge_pc_driver.find_element(By.XPATH, "//div[@class='btOptionCard' and @id='rqAnswerOption0']")
+                                # or_detector.click()
+                                realistic_mouse_click(edge_pc_driver, or_detector)
+                                # loading wait
+                                time.sleep(6)
+                            pass
+                        except Exception:
+                            pass
+
+                # --------------------------------------------------End of one Loop Area-------------------------------------------------------
+                if not element_found:
+                    if edge_pc_driver.current_url == "https://rewards.bing.com/welcometour":
+                        click_bing_wellcome_quit = edge_pc_driver.find_element(By.XPATH, "//button[@ng-show='$ctrl.hasCloseButton']")
+                        realistic_mouse_click(edge_pc_driver, click_bing_wellcome_quit)
+                        # click_bing_wellcome_quit.click()
+                        continue
+                if not element_found:
+                    if edge_pc_driver.current_url == "https://rewards.bing.com/legaltextbox":
+                        spotify_popup = None
+                        try:
+                            # spotify_popup = driver.find_element(By.XPATH, '//div[@role="dialog" and @tabindex="0"]')
+                            spotify_popup = WebDriverWait(edge_pc_driver, 2).until(ec.visibility_of_element_located((By.XPATH, '//div[@role="dialog" and @tabindex="0"]')))
+                        # except NoSuchElementError:
+                        # pass
+                        except TimeoutException:
+                            pass
+
+                        if spotify_popup:
+                            annoying_popup_escape = WebDriverWait(edge_pc_driver, 10).until(ec.presence_of_element_located((By.XPATH, "//button[@ng-show='$ctrl.hasCloseButton']")))
+                            # annoying_popup_escape = driver.find_element(By.XPATH, "//button[@ng-show='$ctrl.hasCloseButton']")
+                            # annoying_popup_escape.click()
+                            realistic_mouse_click(edge_pc_driver, annoying_popup_escape)
+                            continue
+                # end of one card
+                time.sleep(0.5)
+                edge_pc_driver.close()
+                # wechselt zum original tab(cards tab) zurück
+                edge_pc_driver.switch_to.window(edge_pc_driver.window_handles[0])
+
+        # wechselt zum original tab nach allen cards zurück
+        edge_pc_driver.switch_to.window(edge_pc_driver.window_handles[0])
+        # cooldown for animation
+        time.sleep(5)
+        points = WebDriverWait(edge_pc_driver, 10).until(ec.presence_of_element_located((By.XPATH, "//span[@mee-element-ready='$ctrl.loadCounterAnimation()']")))
+        zahl = points.text
+        # Wandele den Text in eine Fließkommazahl (float) um
+        zahl_cleaned = zahl.replace('.', '').replace(',', '')  # Entferne Punkte und Kommas
+        zahl_float = float(zahl_cleaned)  # Wandele die gereinigte Zahl in einen Float um
+        # Konvertiere die Fließkommazahl in eine Ganzzahl
+        zahl = int(zahl_float)
+        print(zahl)
+        # -------------------------------------------------------Discord(Webhook) Area-------------------------------------------------------
+        # sagt bescheid, wenn ein konto die benötigten punkte erreicht hat
+
+        umgerechnet_euro = (int(zahl)) / 1500
+        umgerechnet_euro = round(umgerechnet_euro, 2)
+        if (int(zahl)) > 7500:
+            webhook_goal_reached = "https://discord.com/api/webhooks/1102388137277268091/val_aTt-lnYLIppF77AC7GejCZWcW6b2deW3wgWrStq2sINK92uzqw5Yo4XktHFC1GSJ"
+            discord_message = f'│{account_email}│ hat das Ziel Erreicht!, @everyone PW:│{account_passwort}│ ►{zahl}│In Euro►{umgerechnet_euro}€'
+            converted_discord_message = {"content": discord_message}
+            requests.post(webhook_goal_reached, data=json.dumps(converted_discord_message), headers={"Content-Type": "application/json"})
+
+            autostart_path = os.path.join(os.environ['APPDATA'], 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
+            desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop')
+            auto_start_filename = 'autostart.bat'
+            if os.path.isfile(os.path.join(autostart_path, auto_start_filename)):
+                # Pfad zur Quelldatei
+                source_file = os.path.join(autostart_path, auto_start_filename)
+                # Pfad zum Zielort auf dem Desktop
+                destination_file = os.path.join(desktop_path, auto_start_filename)
+                try:
+                    # Datei verschieben
+                    os.rename(source_file, destination_file)
+                    print(f'Datei "{auto_start_filename}" wurde erfolgreich vom Autostart-Ordner auf den Desktop verschoben.')
+                except Exception as e:
+                    print(f'Fehler beim Verschieben der Datei: {str(e)}')
+            else:
+                print(f'Die Datei "{auto_start_filename}" wurde im Autostart-Ordner nicht gefunden.')
+
+        # schickt account stand in den discord
+        discord_message = f'► **{server_name}**✅ │{account_email}│ PW:│{account_passwort}│ ►{zahl}│In Euro►{umgerechnet_euro}€│'
+        converted_discord_message = {"content": discord_message}
+        requests.post(account_stand, data=json.dumps(converted_discord_message), headers={"Content-Type": "application/json"})
+
+        # Schickt Gesamt Points in Discord
+        webhook_total_bing_points = "https://discord.com/api/webhooks/1141744899067220080/9Ytm2eKB-AZ7It01DiwJUvlyB5uan0amobW4BTt9HMKAk8Lj774nuYisToOetrPnwA3h"
+        sa = gspread.service_account()
+        sheets = sa.open("Points")
+        wks = sheets.worksheet("sheet1")
+
+        # Updatet Punkte in der Datenbank
+        punkte = zahl
+        wks.update(sheetcord, punkte)
+
+        # Datenbank Punkte auslesen
+        gesamt_cell_value = wks.acell("G2").value
+        gesamt_punkte = int(gesamt_cell_value)
+
+        # Berechnung des Euro-Werts
+        euro_gesamt = gesamt_punkte / 1500
+
+        discord_message = f'Die aktuelle Gesamtpunktzahl ist: {gesamt_punkte}\nDer entsprechende Euro-Wert ist: {euro_gesamt:.2f}€'
+        converted_discord_message = {"content": discord_message}
+        requests.post(webhook_total_bing_points, data=json.dumps(converted_discord_message), headers={"Content-Type": "application/json"})
+        edge_pc_driver.quit()
+
+        # -------------------------------------------------------Exception Area-------------------------------------------------------
+    # schreibt alle fehler in den error channel
+    except Exception as e:
+        # Screenshot machen
+        screenshot = ImageGrab.grab()
+        screenshot.save("screenshot.png")
+        # Discord-Nachricht konstruieren und Screenshot als Anhang hinzufügen
+        discord_message = f"Ein Fehler bei Account:│►{account_passwort}│ ist aufgetreten: {str(e)} @everyone"
+        discord_screenshot_error_message = {"content": discord_message}
+        files = {"file": ("screenshot.png", open("screenshot.png", "rb"))}
+        # Nachricht über Discord-Webhook senden und Screenshot als Anhang hinzufügen
+        requests.post(error_webhook, data=discord_screenshot_error_message, files=files)
+
+    # -------------------------------------------------------Finishing Area-------------------------------------------------------
+    # safes json changes (old)
+    print("-------------------Done-------------------")
+
+
+# -------------------------------------------------------Execute Area-------------------------------------------------------
+
+def pc_searches():
+    edge_options = Options()
+    edge_options.use_chromium = True
+    edge_options.add_argument(f'user-data-dir={user_data_dir}')
+    edge_options.add_experimental_option("excludeSwitches", ["enable-popup-blocking"])
+    edge_options.add_argument("--profile.default_content_setting_values.geolocation=1")  # old is 2
+    edge_options.add_argument("--lang=de-DE")
+
+    # new and testing
+    edge_options.add_experimental_option('useAutomationExtension', False)
+    edge_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    edge_options.add_argument('--no-sandbox')
+    edge_options.add_argument('--disable-blink-features=AutomationControlled')
+
+    # -------------------------------------------------------Login Area-------------------------------------------------------
+    # Erstelle eine Instanz des Chrome-Browsers
+    edge_pc_driver = webdriver.Edge(options=edge_options)
+
+    try:
+        # prepare searching
+        edge_pc_driver.get('https://bing.com')  # https://bing.com
+        # loading wait
+        time.sleep(4)
+        # -------------------------------------------------------Search Area-------------------------------------------------------
+        # clicks search bar
+        try:
+            click_searchbar = WebDriverWait(edge_pc_driver, 3).until(ec.presence_of_element_located((By.XPATH, "//textarea[@id='sb_form_q']")))
+            # click_searchbar.click()
+            realistic_mouse_click(edge_pc_driver, click_searchbar)
+
+        except TimeoutException:
+            click_searchbar = WebDriverWait(edge_pc_driver, 3).until(ec.presence_of_element_located((By.XPATH, "//input[@id='sb_form_q']")))
+            # click_searchbar.click()
+            realistic_mouse_click(edge_pc_driver, click_searchbar)
+
+        # starts search loop
+        word_list = nltk.corpus.words.words()  # erstellt wort liste
+        random_word = random.choice(word_list)
+        wort_lange = (len(random_word))  # ermittelt die wort länge, um sie später zu entfernen
+        word_list.append(random_word)  # Das zufällige Wort zur Liste hinzufügen
+        click_searchbar.send_keys(random_word)
+        click_searchbar.send_keys(Keys.ENTER)
+        for d in range(search_counter):
+            try:
+                click_searchbar = WebDriverWait(edge_pc_driver, 3).until(ec.presence_of_element_located((By.XPATH, "//textarea[@id='sb_form_q']")))
+                # click_searchbar.click()
+                realistic_mouse_click(edge_pc_driver, click_searchbar)
+
+            except TimeoutException:
+                click_searchbar = WebDriverWait(edge_pc_driver, 3).until(ec.presence_of_element_located((By.XPATH, "//input[@id='sb_form_q']")))
+                #  click_searchbar.click()
+                realistic_mouse_click(edge_pc_driver, click_searchbar)
+
+            # löscht erstes eingabewort
+            for r in range(wort_lange):
+                click_searchbar.send_keys(Keys.BACKSPACE * 2)
+                # time.sleep(0.01)
+            # nimmt wort aus wortliste
+            random_word = random.choice(word_list)
+            wort_lange = (len(random_word))
+            # gibt word in suchbar hinein
+            click_searchbar.send_keys(random_word)
+            click_searchbar.send_keys(Keys.ENTER)
+        # end
+        edge_pc_driver.quit()
+    except Exception as e:
+        # Screenshot machen
+        screenshot = ImageGrab.grab()
+        screenshot.save("screenshot.png")
+        # Discord-Nachricht konstruieren und Screenshot als Anhang hinzufügen
+        discord_message = f"Ein Fehler bei Account:│►{account_passwort}│ ist aufgetreten: {str(e)} @everyone"
+        discord_screenshot_error_message = {"content": discord_message}
+        files = {"file": ("screenshot.png", open("screenshot.png", "rb"))}
+        # Nachricht über Discord-Webhook senden und Screenshot als Anhang hinzufügen
+        requests.post(error_webhook, data=discord_screenshot_error_message, files=files)
+
+
+main()
+
+
 
 
